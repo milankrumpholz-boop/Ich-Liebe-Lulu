@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Für Luisa 💖</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  text-align: center;
+  padding: 60px 20px;
+  min-height: 200vh; /* Scroll möglich */
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+h1 { color: #b30059; font-size: 2em; }
+p { font-size: 1.3em; }
+button {
+  font-size: 1.4em;
+  padding: 16px 40px;
+  margin: 20px;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+}
+#yes { background-color: #ff4d88; color: white; }
+#no { background-color: #cccccc; position: absolute; }
+#love { display: none; margin-top: 30px; position: relative; }
+img { width: 90%; max-width: 350px; border-radius: 25px; margin-top: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+/* Herzen */
+.heart {
+  position: fixed;
+  animation: fly 4s linear forwards;
+  opacity: 0.8;
+}
+@keyframes fly {
+  0% { transform: translateY(0) scale(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+}
+
+/* Feuerwerk */
+.firework {
+  position: absolute;
+  pointer-events: none;
+  animation: explode 1s ease-out forwards;
+}
+@keyframes explode {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<h1>💖 Liebe Luisa 💖</h1>
+<p><strong>Willst du mein Valentinsschatz sein? 🌹</strong></p>
+
+<button id="yes" onclick="yesClicked()">JA 💘</button>
+<button id="no" onmouseover="moveNo()">NEIN 🙈</button>
+
+<div id="love">
+  <h2>Ich liebe dich ❤️</h2>
+  <p>Dein Milan</p>
+  <img src="love.jpg" alt="Wir ❤️">
+
+  <!-- Musik-Link -->
+  <div style="margin-top:20px;">
+    <a href="https://www.youtube.com/watch?v=9Z0YJc7G4kU" target="_blank"
+       style="font-size:1.4em; padding:16px 40px; background:#ff4d88; color:white; border-radius:40px; text-decoration:none; display:inline-block;">
+      ▶ Musik abspielen
+    </a>
+  </div>
+</div>
+
+<script>
+function moveNo() {
+  const no = document.getElementById("no");
+  no.style.left = Math.random() * (window.innerWidth - 120) + "px";
+  no.style.top = Math.random() * (window.innerHeight - 60) + "px";
+}
+
+function yesClicked() {
+  document.getElementById("love").style.display = "block";
+  document.getElementById("yes").style.display = "none";
+  document.getElementById("no").style.display = "none";
+
+  startHearts();
+  startFireworks();
+}
+
+// Herzen fliegen nach oben, verschiedene Farben und Größen
+function startHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (20 + Math.random()*30) + "px";
+    heart.style.color = `hsl(${Math.random()*360},80%,70%)`;
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),4000);
+  }, 200); // alle 0,2 Sekunden ein Herz
+}
+
+// Feuerwerk in bunten Farben, dauerhaft
+function startFireworks() {
+  setInterval(() => {
+    const fire = document.createElement("div");
+    fire.className = "firework";
+    fire.innerHTML = "🎆";
+    fire.style.left = Math.random()*100 + "vw";
+    fire.style.top = Math.random()*50 + "vh";
+    fire.style.fontSize = (20 + Math.random()*40) + "px";
+    document.body.appendChild(fire);
+    setTimeout(()=>fire.remove(),1000);
+  }, 400); // alle 0,4 Sekunden Feuerwerk
+}
+</script>
+
+</body>
+</html>
